@@ -58,7 +58,6 @@ class HorseRaces:
             EXAMPLE: {'Special Week': {'Tenno Sho Fall': 16.5, 'Tenno Sho Spring': 16.3, 'Teio Sho': 17.0}}
         '''
         race_dict = {}
-
         headers = table[0]
 
         for row in table[1:]:
@@ -88,7 +87,18 @@ class HorseRaces:
             tuple of fastest race name and the time
             EXAMPLE: ('Teio Sho', 14.8)
         '''
-        pass
+        if horse not in self.race_dict:
+            return (None, 999.9)
+        
+        fastest_race = None
+        fastest_time = float('inf')
+
+        for race, time in self.race_dict[horse].items():
+            if time < fastest_time:
+                fastest_time = time
+                fastest_race = race
+
+        return (fastest_race, fastest_time)
 
 ###############################################################################
 ##### TASK 3
